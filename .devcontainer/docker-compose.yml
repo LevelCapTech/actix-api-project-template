@@ -1,0 +1,9 @@
+services:
+  rust-app:
+    build:
+      context: ..
+      dockerfile: ./.devcontainer/Dockerfile
+    image: rust-app:dev
+    command: sleep infinity
+    volumes:
+      - ..:/workspaces/app/
