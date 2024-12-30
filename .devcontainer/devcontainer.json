@@ -4,7 +4,7 @@
   "service": "rust-app",
   "workspaceFolder": "/workspaces/app/",
   //"postCreateCommand": "",
-  //"forwardPorts": [], // 必要に応じてポートを追加
+  "forwardPorts": [8080, 8081], // 必要に応じてポートを追加
   "remoteUser": "vscode",
   "customizations": {
     "vscode": {

@@ -7,3 +7,12 @@ services:
     command: sleep infinity
     volumes:
       - ..:/workspaces/app/
+
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    # environment:
+    #   SWAGGER_JSON: /openapi/openapi.json
+    # volumes:
+    #   - ./openapi:/openapi
+    ports:
+      - "8081:8080"
