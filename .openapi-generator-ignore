@@ -1,0 +1,6 @@
+docs/
+examples/
+api/openapi.yaml
+.cargo/
+.openapi-generator/
+.gitignore
