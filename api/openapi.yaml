@@ -1,0 +1,165 @@
+openapi: 3.0.0
+info:
+  description: Actix Web を使ったサンプルAPI
+  title: Actix Web API
+  version: 1.0.0
+servers:
+- description: ローカルサーバー
+  url: http://127.0.0.1:8080
+paths:
+  /:
+    get:
+      description: シンプルなJSONレスポンスを返します。
+      operationId: getIndex
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getIndex_200_response'
+          description: 成功レスポンス
+      summary: メインエンドポイント
+  /items:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/_items_get_200_response_inner'
+                type: array
+          description: アイテムリストを返します。
+      summary: アイテム一覧取得
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_items_post_request'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_items_post_201_response'
+          description: 作成成功
+      summary: 新規アイテム作成
+  /items/{id}:
+    delete:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: 削除成功
+      summary: アイテム削除
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_items_get_200_response_inner'
+          description: 指定アイテムを返します。
+      summary: アイテム取得
+    put:
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_items__id__put_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_items__id__put_200_response'
+          description: 更新成功
+      summary: アイテム更新
+components:
+  schemas:
+    _items__id__put_request:
+      properties:
+        name:
+          example: Updated Item
+          type: string
+      type: object
+    getIndex_200_response:
+      example:
+        code: 200
+        message: "Hello, Actix!"
+      properties:
+        message:
+          example: "Hello, Actix!"
+          type: string
+        code:
+          example: 200
+          type: integer
+      type: object
+    _items_get_200_response_inner:
+      example:
+        name: Sample Item
+        id: 1
+      properties:
+        id:
+          example: 1
+          type: integer
+        name:
+          example: Sample Item
+          type: string
+      type: object
+    _items_post_request:
+      properties:
+        name:
+          example: New Item
+          type: string
+      type: object
+    _items__id__put_200_response:
+      example:
+        name: Updated Item
+        id: 1
+      properties:
+        id:
+          example: 1
+          type: integer
+        name:
+          example: Updated Item
+          type: string
+      type: object
+    _items_post_201_response:
+      example:
+        name: New Item
+        id: 1
+      properties:
+        id:
+          example: 1
+          type: integer
+        name:
+          example: New Item
+          type: string
+      type: object
+
