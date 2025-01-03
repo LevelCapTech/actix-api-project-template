@@ -1,5 +1,0 @@
-docs/
-api/openapi.yaml
-.cargo/
-.openapi-generator/
-.gitignore
