@@ -1,0 +1,141 @@
+openapi: 3.0.0
+info:
+  title: Actix Web API
+  version: 1.0.0
+  description: Actix Web を使ったサンプルAPI
+servers:
+  - url: http://127.0.0.1:8080
+    description: ローカルサーバー
+paths:
+  /:
+    get:
+      summary: メインエンドポイント
+      description: シンプルなJSONレスポンスを返します。
+      operationId: getIndex
+      responses:
+        '200':
+          description: 成功レスポンス
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Hello, Actix!"
+                  code:
+                    type: integer
+                    example: 200
+
+  /items:
+    get:
+      summary: アイテム一覧取得
+      responses:
+        '200':
+          description: アイテムリストを返します。
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: "Sample Item"
+    post:
+      summary: 新規アイテム作成
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "New Item"
+      responses:
+        '201':
+          description: 作成成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: "New Item"
+
+  /items/{id}:
+    get:
+      summary: アイテム取得
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 指定アイテムを返します。
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: "Sample Item"
+    put:
+      summary: アイテム更新
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Updated Item"
+      responses:
+        '200':
+          description: 更新成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: "Updated Item"
+    delete:
+      summary: アイテム削除
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: 削除成功

@@ -11,7 +11,7 @@ services:
   swagger-ui:
     image: swaggerapi/swagger-ui
     environment:
-      SWAGGER_JSON: /api-docs/v1.json # Swagger UI が読み込む JSON ファイルのパス
+      SWAGGER_JSON: /api-docs/v1.yaml # Swagger UI が読み込む JSON ファイルのパス
     volumes:
       - ../api-docs:/api-docs # API 定義書の置き場をわかりやすく変更
     ports:
@@ -20,7 +20,7 @@ services:
   swagger-editor:
     image: swaggerapi/swagger-editor
     environment:
-      SWAGGER_FILE: /api-docs/v1.json # Swagger UI が読み込む JSON ファイルのパス
+      SWAGGER_FILE: /api-docs/v1.yaml # Swagger UI が読み込む JSON ファイルのパス
     volumes:
       - ../api-docs:/api-docs # API 定義書の置き場をわかりやすく変更
     ports:
